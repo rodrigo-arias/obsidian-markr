@@ -1,0 +1,10 @@
+{
+  "id": "markr",
+  "name": "Markr",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Multi-color highlights using standard Markdown ==text== syntax with a leading color emoji.",
+  "author": "Rodrigo Arias",
+  "authorUrl": "https://github.com/rodrigo-arias",
+  "isDesktopOnly": false
+}

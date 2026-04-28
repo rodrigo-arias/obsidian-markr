@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build
+main.js
+*.js.map
+
+# Runtime
+data.json
+markr-debug.txt
+.hotreload
+
+# Editor
+.vscode/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# AI tools
+.claude/

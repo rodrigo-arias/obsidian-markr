@@ -1,0 +1,44 @@
+{
+  "name": "markr",
+  "version": "1.0.0",
+  "description": "Multi-color highlights for Obsidian.",
+  "keywords": [
+    "obsidian",
+    "plugin",
+    "highlight",
+    "markdown"
+  ],
+  "license": "MIT",
+  "author": "Rodrigo Arias",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "build": "tsc -noEmit -skipLibCheck && tsdown",
+    "check": "biome check",
+    "check:fix": "biome check --write",
+    "dev": "tsdown --watch",
+    "format": "biome format --write",
+    "lint": "biome lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "lefthook"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.13",
+    "@codemirror/state": "^6.4.1",
+    "@codemirror/view": "^6.26.3",
+    "@types/node": "^24.12.2",
+    "happy-dom": "^20.9.0",
+    "lefthook": "^2.1.6",
+    "obsidian": "^1.5.7",
+    "tsdown": "^0.21.10",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10",
+    "vitest": "^4.1.5"
+  }
+}
