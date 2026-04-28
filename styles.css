@@ -1,0 +1,63 @@
+/* Markr — multi-color highlights */
+
+/* ───────────────────────── Color tokens ────────────────────────── */
+
+:root {
+  --markr-default: rgba(255, 235, 59, 0.45);
+  --markr-green: rgba(76, 175, 80, 0.35);
+  --markr-red: rgba(244, 67, 54, 0.35);
+  --markr-blue: rgba(33, 150, 243, 0.35);
+  --markr-yellow: rgba(255, 235, 59, 0.45);
+  --markr-purple: rgba(156, 39, 176, 0.35);
+  --markr-orange: rgba(255, 152, 0, 0.35);
+}
+
+/* ──────────────────── Highlight backgrounds ────────────────────── *
+ * Applies in Reading View (<mark>) and Live Preview (CM6 mark span).
+ */
+
+.markr-default {
+  background-color: var(--markr-default) !important;
+}
+.markr-green {
+  background-color: var(--markr-green) !important;
+}
+.markr-red {
+  background-color: var(--markr-red) !important;
+}
+.markr-blue {
+  background-color: var(--markr-blue) !important;
+}
+.markr-yellow {
+  background-color: var(--markr-yellow) !important;
+}
+.markr-purple {
+  background-color: var(--markr-purple) !important;
+}
+.markr-orange {
+  background-color: var(--markr-orange) !important;
+}
+
+.markr-default,
+.markr-green,
+.markr-red,
+.markr-blue,
+.markr-yellow,
+.markr-purple,
+.markr-orange {
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+/* ─────────────────────── Color dot widget ──────────────────────── *
+ * Renders the highlight's color emoji as an inline button. Sits inside
+ * the bg-marked span so it shares the highlight's background.
+ */
+
+.markr-dot {
+  display: inline-block;
+  margin-right: 0.2em;
+  font-size: 0.85em;
+  cursor: pointer;
+  user-select: none;
+}
