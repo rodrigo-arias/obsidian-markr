@@ -6,6 +6,11 @@ export interface EditorPos {
   ch: number;
 }
 
+/**
+ * Structural subset of Obsidian's `Editor` that `applyColor` and
+ * `removeHighlight` actually use. Defined here so tests can drive the
+ * logic with a plain object rather than a full Obsidian editor stub.
+ */
 export interface EditorLike {
   getLine(line: number): string;
   getCursor(which?: "from" | "to" | "head" | "anchor"): EditorPos;
@@ -15,6 +20,14 @@ export interface EditorLike {
   setSelection(anchor: EditorPos, head?: EditorPos): void;
 }
 
+/**
+ * Apply `color` to the current selection or cursor.
+ * - Selection on one line: wrap as `==🟢 text==`, expanding outward to swallow any
+ *   highlight the selection straddles; selecting the same color twice unwraps it.
+ * - Cursor inside an existing highlight: swap that highlight's color.
+ * - Cursor with no highlight: insert an empty `==🟢 ==` and place the caret between the spaces.
+ * - Selection spanning multiple lines: no-op (highlights don't cross line boundaries).
+ */
 export function applyColor(editor: EditorLike, color: ColorDef, palette: ColorDef[]): void {
   const from = editor.getCursor("from");
   const to = editor.getCursor("to");
@@ -31,6 +44,11 @@ export function applyColor(editor: EditorLike, color: ColorDef, palette: ColorDe
   handleSelection(editor, from, to, color, palette);
 }
 
+/**
+ * Strip highlight wrappers at the cursor or selection. If the selection straddles
+ * a highlight boundary, the range is expanded to cover the whole highlight before
+ * stripping so we never leave a dangling `==`.
+ */
 export function removeHighlight(editor: EditorLike, palette: ColorDef[]): void {
   const from = editor.getCursor("from");
   const to = editor.getCursor("to");
@@ -159,6 +177,10 @@ function innerText(match: HighlightMatch): string {
   return match.inner.slice(match.textStart - match.innerStart);
 }
 
+/**
+ * Strip every `==...==` wrapper from `text` along with any leading color emoji
+ * inside, returning the plain text. Non-highlight content passes through unchanged.
+ */
 export function stripAllHighlightMarkers(text: string, palette: ColorDef[]): string {
   const re = /==(.+?)==/g;
   let result = "";

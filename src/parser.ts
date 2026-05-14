@@ -1,5 +1,12 @@
 import type { ColorDef } from "./types";
 
+/**
+ * Location of a `==...==` span in a single line.
+ * `start`/`end` cover the literal `==` markers. `innerStart` is right after
+ * the opening `==`; `textStart` skips the optional leading color emoji and
+ * its trailing space. `emoji` is the matched palette emoji, or `null` for a
+ * default highlight.
+ */
 export interface HighlightMatch {
   start: number;
   end: number;

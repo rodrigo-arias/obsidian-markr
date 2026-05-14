@@ -2,6 +2,11 @@ import type { MarkdownPostProcessor } from "obsidian";
 import { DEFAULT_COLORS } from "./colors";
 import type { ColorDef } from "./types";
 
+/**
+ * Reading-view post-processor: finds every `<mark>` Obsidian rendered from
+ * `==...==`, adds the matching `markr-{color}` class, and strips the leading
+ * color emoji from the visible text. Source-of-truth Markdown is untouched.
+ */
 export function createPostProcessor(): MarkdownPostProcessor {
   return (el) => {
     el.querySelectorAll("mark").forEach((mark) => {
@@ -10,6 +15,11 @@ export function createPostProcessor(): MarkdownPostProcessor {
   };
 }
 
+/**
+ * Idempotent via the `markrDecorated` dataset flag — the post-processor can be
+ * invoked multiple times on the same DOM (e.g. on partial re-renders) and we
+ * must not strip the same emoji twice.
+ */
 function decorateMark(mark: HTMLElement): void {
   if (mark.dataset.markrDecorated) return;
   mark.dataset.markrDecorated = "true";

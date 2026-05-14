@@ -3,6 +3,14 @@ import { DEFAULT_COLORS } from "./colors";
 import { applyColor } from "./editor-ops";
 import type { ColorDef } from "./types";
 
+/**
+ * Show the palette as an Obsidian native `Menu`. Anchors at `evt` when given
+ * (right-click / touch); otherwise at the editor caret.
+ *
+ * Items use emoji-in-title rather than `setIcon()` because macOS's native menu
+ * doesn't render icons — emoji as text is the only way to show a color hint
+ * there.
+ */
 export function openColorPicker(editor: Editor, evt?: MouseEvent): void {
   const menu = new Menu();
   for (const color of DEFAULT_COLORS) {

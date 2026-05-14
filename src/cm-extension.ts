@@ -7,6 +7,14 @@ import { findAllHighlights } from "./parser";
 
 export const markrRefreshEffect = StateEffect.define<null>();
 
+/**
+ * StateField that decorates highlights in Live Preview:
+ *   - `Decoration.mark` paints the `markr-{color}` background over each span.
+ *   - `Decoration.replace` hides the `==🟢 ` opening syntax (with an inline color
+ *     emoji widget when the cursor is inside the highlight, or with nothing when
+ *     outside) and hides the trailing `==`.
+ * Rebuilds on document changes, selection changes, or an explicit `markrRefreshEffect`.
+ */
 export function createMarkrField(onDotClick: DotClickHandler) {
   return StateField.define<DecorationSet>({
     create(state) {
@@ -24,6 +32,15 @@ export function createMarkrField(onDotClick: DotClickHandler) {
   });
 }
 
+/**
+ * Source mode shows raw `==...==` verbatim, so this returns `Decoration.none`
+ * outside Live Preview.
+ *
+ * Uses `Decoration.replace` (not `Decoration.widget`) for the syntax markers
+ * because `replace` hides the underlying characters from rendering without
+ * mutating the document — a widget alone would insert content but leave the
+ * `==🟢 ` and trailing `==` visible.
+ */
 export function build(
   source: EditorState | EditorView,
   onDotClick: DotClickHandler,
