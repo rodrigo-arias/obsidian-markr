@@ -13,30 +13,11 @@
 }
 
 /* ──────────────────── Highlight backgrounds ────────────────────── *
- * Applies in Reading View (<mark>) and Live Preview (CM6 mark span).
+ * Reading View: <mark class="markr-{color}">.
+ * Live Preview: <span class="markr-{color}"> nested inside Obsidian's
+ * .cm-highlight wrapper, whose own background is cleared here so the
+ * markr color renders as a single layer.
  */
-
-.markr-default {
-  background-color: var(--markr-default) !important;
-}
-.markr-green {
-  background-color: var(--markr-green) !important;
-}
-.markr-red {
-  background-color: var(--markr-red) !important;
-}
-.markr-blue {
-  background-color: var(--markr-blue) !important;
-}
-.markr-yellow {
-  background-color: var(--markr-yellow) !important;
-}
-.markr-purple {
-  background-color: var(--markr-purple) !important;
-}
-.markr-orange {
-  background-color: var(--markr-orange) !important;
-}
 
 .markr-default,
 .markr-green,
@@ -47,6 +28,57 @@
 .markr-orange {
   border-radius: 3px;
   padding: 0 2px;
+}
+
+.markdown-rendered {
+  mark.markr-default {
+    background-color: var(--markr-default);
+  }
+  mark.markr-green {
+    background-color: var(--markr-green);
+  }
+  mark.markr-red {
+    background-color: var(--markr-red);
+  }
+  mark.markr-blue {
+    background-color: var(--markr-blue);
+  }
+  mark.markr-yellow {
+    background-color: var(--markr-yellow);
+  }
+  mark.markr-purple {
+    background-color: var(--markr-purple);
+  }
+  mark.markr-orange {
+    background-color: var(--markr-orange);
+  }
+}
+
+.markdown-source-view .cm-line {
+  .cm-highlight {
+    background-color: transparent;
+  }
+  .markr-default {
+    background-color: var(--markr-default);
+  }
+  .markr-green {
+    background-color: var(--markr-green);
+  }
+  .markr-red {
+    background-color: var(--markr-red);
+  }
+  .markr-blue {
+    background-color: var(--markr-blue);
+  }
+  .markr-yellow {
+    background-color: var(--markr-yellow);
+  }
+  .markr-purple {
+    background-color: var(--markr-purple);
+  }
+  .markr-orange {
+    background-color: var(--markr-orange);
+  }
 }
 
 /* ─────────────────────── Color dot widget ──────────────────────── *
