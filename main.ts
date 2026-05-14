@@ -5,11 +5,16 @@ import { openColorPicker } from "@/color-picker";
 import { DEFAULT_COLORS } from "@/colors";
 import { removeHighlight } from "@/editor-ops";
 import { createPostProcessor } from "@/post-processor";
-import { MarkrSettingTab } from "@/settings";
+import { DEFAULT_SETTINGS, type MarkrSettings, MarkrSettingTab } from "@/settings";
 
 export default class MarkrPlugin extends Plugin {
+  settings!: MarkrSettings;
+
   async onload() {
     console.log(`[Markr] loaded v${this.manifest.version}`);
+
+    await this.loadSettings();
+    this.applyPalette();
 
     this.registerMarkdownPostProcessor(createPostProcessor());
 
@@ -39,6 +44,23 @@ export default class MarkrPlugin extends Plugin {
     );
 
     this.addSettingTab(new MarkrSettingTab(this.app, this));
+  }
+
+  onunload() {
+    delete document.body.dataset.markrPalette;
+  }
+
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+  }
+
+  async saveSettings() {
+    await this.saveData(this.settings);
+    this.applyPalette();
+  }
+
+  applyPalette() {
+    document.body.dataset.markrPalette = this.settings.palette;
   }
 
   private openPickerAt(view: EditorView, pos: number) {

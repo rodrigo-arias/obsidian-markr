@@ -1,15 +1,39 @@
 /* Markr — multi-color highlights */
 
-/* ───────────────────────── Color tokens ────────────────────────── */
+/* ───────────────────────── Color tokens ────────────────────────── *
+ * Three palettes, switched via body[data-markr-palette]. The unscoped
+ * :root block is Neutral and acts as the fallback if no palette is
+ * applied yet (e.g. before settings load).
+ */
 
 :root {
-  --markr-default: rgba(255, 235, 59, 0.45);
-  --markr-green: rgba(76, 175, 80, 0.35);
-  --markr-red: rgba(244, 67, 54, 0.35);
-  --markr-blue: rgba(33, 150, 243, 0.35);
-  --markr-yellow: rgba(255, 235, 59, 0.45);
-  --markr-purple: rgba(156, 39, 176, 0.35);
-  --markr-orange: rgba(255, 152, 0, 0.35);
+  --markr-default: oklch(0.85 0.18 95 / 0.6);
+  --markr-yellow: oklch(0.85 0.18 95 / 0.6);
+  --markr-green: oklch(0.72 0.16 150 / 0.55);
+  --markr-red: oklch(0.68 0.17 20 / 0.55);
+  --markr-blue: oklch(0.68 0.14 240 / 0.55);
+  --markr-purple: oklch(0.68 0.15 320 / 0.55);
+  --markr-orange: oklch(0.78 0.16 65 / 0.55);
+}
+
+body[data-markr-palette="subtle"] {
+  --markr-default: oklch(0.9 0.16 95 / 0.45);
+  --markr-yellow: oklch(0.9 0.16 95 / 0.45);
+  --markr-green: oklch(0.82 0.13 150 / 0.4);
+  --markr-red: oklch(0.78 0.13 20 / 0.4);
+  --markr-blue: oklch(0.78 0.11 240 / 0.4);
+  --markr-purple: oklch(0.78 0.12 320 / 0.4);
+  --markr-orange: oklch(0.85 0.14 65 / 0.4);
+}
+
+body[data-markr-palette="bold"] {
+  --markr-default: oklch(0.78 0.2 95 / 0.7);
+  --markr-yellow: oklch(0.78 0.2 95 / 0.7);
+  --markr-green: oklch(0.62 0.18 150 / 0.65);
+  --markr-red: oklch(0.58 0.2 20 / 0.65);
+  --markr-blue: oklch(0.58 0.16 240 / 0.65);
+  --markr-purple: oklch(0.58 0.17 320 / 0.65);
+  --markr-orange: oklch(0.7 0.18 65 / 0.65);
 }
 
 /* ──────────────────── Highlight backgrounds ────────────────────── *
